@@ -50,15 +50,8 @@ services:
       - postgres
     labels:
       - traefik.enable=true
-<<<<<<< HEAD
       - traefik.http.routers.server.entrypoints=web
-      - traefik.http.routers.server.rule=Host(`$DOMAIN`) && PathPrefix(`/api/`)
-=======
-      # - traefik.http.routers.server.entrypoints=web
-      - traefik.http.routers.server.entrypoints=websecure
-      - traefik.http.routers.server.tls.certresolver=letsEncrypt
-      - traefik.http.routers.server.rule=Host(`tivlotcv.com`) && PathPrefix(`/api/`)
->>>>>>> 47eb3e578887efda2a90a12fdccda0a79a828f1f
+      - traefik.http.routers.server.rule=Host(`localhost`) && PathPrefix(`/api/`)
       - traefik.http.routers.server.middlewares=server-stripprefix
       - traefik.http.middlewares.server-stripprefix.stripprefix.prefixes=/api
       - traefik.http.middlewares.server-stripprefix.stripprefix.forceslash=true
@@ -76,16 +69,8 @@ services:
       - server
     labels:
       - traefik.enable=true
-<<<<<<< HEAD
-      - traefik.http.routers.client.rule=Host(`$DOMAIN`)
+      - traefik.http.routers.client.rule=Host(`localhost`)
       - traefik.http.routers.client.entrypoints=web
-=======
-      - traefik.http.routers.client.tls.certresolver=letsEncrypt
-      - traefik.http.routers.client.tls=true 
-      - traefik.http.routers.client.rule=Host(`tivlotcv.com`)
-      - traefik.http.routers.client.entrypoints=websecure
-      # - traefik.http.routers.client.entrypoints=web
->>>>>>> 47eb3e578887efda2a90a12fdccda0a79a828f1f
     restart: always
 
 volumes:
