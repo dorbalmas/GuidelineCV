@@ -2,7 +2,7 @@
 .env
 .env.*
 !.env.example
-
+docker-compose.yml
 # Project Dependencies
 node_modules
 
