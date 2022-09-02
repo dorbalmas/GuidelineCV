@@ -53,7 +53,7 @@ services:
       # - traefik.http.routers.server.entrypoints=web
       - traefik.http.routers.server.entrypoints=websecure
       - traefik.http.routers.server.tls.certresolver=letsEncrypt
-      - traefik.http.routers.server.rule=Host(`$DOMAIN`) && PathPrefix(`/api/`)
+      - traefik.http.routers.server.rule=Host(`tivlotcv.com`) && PathPrefix(`/api/`)
       - traefik.http.routers.server.middlewares=server-stripprefix
       - traefik.http.middlewares.server-stripprefix.stripprefix.prefixes=/api
       - traefik.http.middlewares.server-stripprefix.stripprefix.forceslash=true
@@ -73,7 +73,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.client.tls.certresolver=letsEncrypt
       - traefik.http.routers.client.tls=true 
-      - traefik.http.routers.client.rule=Host(`$DOMAIN`)
+      - traefik.http.routers.client.rule=Host(`tivlotcv.com`)
       - traefik.http.routers.client.entrypoints=websecure
       # - traefik.http.routers.client.entrypoints=web
     restart: always
