@@ -21,12 +21,21 @@ services:
     image: traefik:latest
     container_name: traefik
     command:
+      - --api.insecure=true
+      - --api.dashboard=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.letsEncrypt.acme.email=dorbal31@gmail.com
+      - --certificatesresolvers.letsEncrypt.acme.tlschallenge=true
+      - --certificatesresolvers.letsEncrypt.acme.storage=/letsencrypt/acme.json
     ports:
+      - 443:443
+      - 8080:8080
       - 80:80
     volumes:
+      - ./letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   server:
@@ -41,7 +50,9 @@ services:
       - postgres
     labels:
       - traefik.enable=true
-      - traefik.http.routers.server.entrypoints=web
+      # - traefik.http.routers.server.entrypoints=web
+      - traefik.http.routers.server.entrypoints=websecure
+      - traefik.http.routers.server.tls.certresolver=letsEncrypt
       - traefik.http.routers.server.rule=Host(`$DOMAIN`) && PathPrefix(`/api/`)
       - traefik.http.routers.server.middlewares=server-stripprefix
       - traefik.http.middlewares.server-stripprefix.stripprefix.prefixes=/api
@@ -60,8 +71,11 @@ services:
       - server
     labels:
       - traefik.enable=true
+      - traefik.http.routers.client.tls.certresolver=letsEncrypt
+      - traefik.http.routers.client.tls=true 
       - traefik.http.routers.client.rule=Host(`$DOMAIN`)
-      - traefik.http.routers.client.entrypoints=web
+      - traefik.http.routers.client.entrypoints=websecure
+      # - traefik.http.routers.client.entrypoints=web
     restart: always
 
 volumes:

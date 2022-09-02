@@ -12,11 +12,12 @@ export class MailService {
 
   constructor(private configService: ConfigService) {
     this.transporter = createTransport({
-      host: this.configService.get<string>('mail.host'),
-      port: this.configService.get<number>('mail.port'),
-      pool: true,
-      secure: false,
-      tls: { ciphers: 'SSLv3' },
+      service: 'gmail',
+      //   host: this.configService.get<string>('mail.host'),
+      //   port: this.configService.get<number>('mail.port'),
+      //   pool: true,
+      //   secure: false,
+      //   tls: { ciphers: 'SSLv3' },
       auth: {
         user: this.configService.get<string>('mail.username'),
         pass: this.configService.get<string>('mail.password'),
