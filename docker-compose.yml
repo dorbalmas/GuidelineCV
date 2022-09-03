@@ -21,21 +21,12 @@ services:
     image: traefik:latest
     container_name: traefik
     command:
-      - --api.insecure=true
-      - --api.dashboard=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
-      - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.letsEncrypt.acme.email=dorbal31@gmail.com
-      - --certificatesresolvers.letsEncrypt.acme.tlschallenge=true
-      - --certificatesresolvers.letsEncrypt.acme.storage=/letsencrypt/acme.json
     ports:
-      - 443:443
-      - 8080:8080
       - 80:80
     volumes:
-      - ./letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
   server:
@@ -44,7 +35,7 @@ services:
       context: .
       dockerfile: ./server/Dockerfile
     container_name: server
-    env_file: .env.docker
+    env_file: .env.docker 
     depends_on:
       - traefik
       - postgres
