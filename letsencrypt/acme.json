@@ -5,9 +5,7 @@
       "Registration": {
         "body": {
           "status": "valid",
-          "contact": [
-            "mailto:dorbal31@gmail.com"
-          ]
+          "contact": ["mailto:dorbal31@gmail.com"]
         },
         "uri": "https://acme-v02.api.letsencrypt.org/acme/acct/707097447"
       },
