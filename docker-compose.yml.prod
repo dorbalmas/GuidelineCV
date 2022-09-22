@@ -17,6 +17,16 @@ services:
       retries: 3
     restart: always
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "5050:80"
+    env_file: .env.docker
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
   traefik:
     image: traefik:latest
     container_name: traefik
@@ -27,7 +37,7 @@ services:
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.letsEncrypt.acme.email=dorbal31@gmail.com
+      - --certificatesresolvers.letsEncrypt.acme.email=dorbalmas77@gmail.com
       - --certificatesresolvers.letsEncrypt.acme.tlschallenge=true
       - --certificatesresolvers.letsEncrypt.acme.storage=/letsencrypt/acme.json
     ports:
@@ -80,3 +90,4 @@ services:
 
 volumes:
   pgdata:
+  pgadmin-data:

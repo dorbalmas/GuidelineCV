@@ -37,6 +37,9 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @Column({ default: false })
+  isSubscribed: boolean;
+
   constructor(partial: Partial<User>) {
     Object.assign(this, partial);
   }
