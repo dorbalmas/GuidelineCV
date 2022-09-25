@@ -48,7 +48,7 @@ services:
     labels:
       - "traefik.enable=true"
       # Dashboard
-      - "traefik.http.routers.traefik.rule=Host(`dashboard.${'tivlotcv.com'}`)"
+      - "traefik.http.routers.traefik.rule=Host(`dashboard.tivlotcv.com`)"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.tls=true"
       - "traefik.http.routers.traefik.tls.certresolver=le"
