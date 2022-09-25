@@ -2,6 +2,7 @@
 docker-compose.yml*
 docker-compose.yml.dev
 docker-compose.yml.prod
+
 # Environment Variables
 .env
 .env.*
